@@ -5,13 +5,14 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import { dbConnection } from './mongo.js';
+import postingRoutes from '../src/posting/posting.routes.js'
 
 class Server{
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
-
-        this.middlewares();
+        this.postingPath = '/blogWorking/v1/posting'
+        this.middlewares(); 
         this.conectarDB();
         this.routes();
     }
@@ -29,6 +30,7 @@ class Server{
     }
 
     routes(){
+        this.app.use(this.postingPath, postingRoutes);
     }
 
     listen(){
