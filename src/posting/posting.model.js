@@ -20,7 +20,7 @@ const PublicationSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    image: {
+    imagePrincipal: {
         type: String,
         default: 'none'
     },
