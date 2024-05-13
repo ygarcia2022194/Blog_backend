@@ -1,26 +1,37 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const PostSchema = mongoose.Schema({
-    titulo:{
-        type:String,
-        required: true
+const PublicationSchema = mongoose.Schema({
+    autor: {
+        type: String,
     },
-    categoria:{
-        type:String,
-        required: true
+    titulo: {
+        type: String,
+        required: [true, "Title is required"],
     },
-    texto:{
+    categoria: {
+        type: String,
+        required: [true, "Category is required"],
+    },
+    texto: {
+        type: String,
+        required: [true, "Content is mandatory"],
+    },
+    tools:{
         type: String,
         required: true
     },
-    image:{
+    image: {
         type: String,
         default: 'none'
     },
-    estado:{
-        type: Boolean,
-        default: true
-    }
-})
+    comentarios: [{
+        usuario: {
+            type: String,
+        },
+        descripcion: {
+            type: String,
+        },
+    }],
+});
 
-export default mongoose.model('Post', PostSchema)
+export default mongoose.model("Publication", PublicationSchema);
