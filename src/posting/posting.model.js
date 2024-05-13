@@ -24,11 +24,15 @@ const PublicationSchema = mongoose.Schema({
         type: String,
         default: 'none'
     },
+    link:{
+        type: String,
+        required: true
+    },
     comentarios: [{
         usuario: {
             type: String,
         },
-        descripcion: {
+        comment: {
             type: String,
         },
     }],

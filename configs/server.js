@@ -6,12 +6,13 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import { dbConnection } from './mongo.js';
 import postingRoutes from '../src/posting/posting.routes.js'
+import { publicationsPost } from '../src/posting/posting.controller.js'
 
 class Server{
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
-        this.postingPath = '/blogWorking/v1/posting'
+        this.publicationPath = '/blog/v1'
         this.middlewares(); 
         this.conectarDB();
         this.routes();
@@ -19,6 +20,7 @@ class Server{
 
     async conectarDB(){
         await dbConnection();
+        await publicationsPost();
     }
 
     middlewares(){
@@ -30,7 +32,7 @@ class Server{
     }
 
     routes(){
-        this.app.use(this.postingPath, postingRoutes);
+        this.app.use(this.publicationPath, postingRoutes);
     }
 
     listen(){

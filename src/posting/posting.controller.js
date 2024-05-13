@@ -94,12 +94,10 @@ export const publicationsGetById = async (req, res) => {
 }
 
 export const publicationsPut = async (req, res) => {
-    const { id } = req.params;
-    const {usuario, descripcion} = req.body;
-
-    nuevoComentario = {nombre: usuario, descripcion: descripcion};
-
-    await Publication.findByIdAndUpdate(id, {$push: {comentarios: nuevoComentario}});
-    res.json({mensaje: 'Comentario agregado'});
+    const { id} = req.params;
+    const { _id, author, title, texto, tools, image, link, ...rest} = req.body;
+    const addComment = { ...rest};
+    await Publication.findByIdAndUpdate(id, { $push: { comments: addComment } });
+    res.status(200).json({ msg: "Comment added" });
 };
 

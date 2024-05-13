@@ -8,8 +8,10 @@ router.get('/posting', publicationsGet);
 
 router.get('/posting/:id', publicationsGetById);
 
-router.put('/posting/:id', [
-    check('id', 'No es un ID válido').isMongoId(),
+router.put('/posting/addComment:id', [
+    check("id", "Id is required").not().isEmpty(),
+    check("commentUser", "The name of the user is required").not().isEmpty(),
+    check("commentMain", "The commentMain is required").not().isEmpty(),
 ], publicationsPut);
 
 export default router;
